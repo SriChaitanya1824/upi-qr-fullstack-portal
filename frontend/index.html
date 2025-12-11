@@ -1,1 +1,66 @@
-<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport"content="width=device-width,initial-scale=1"/><title>UPI QR Portal</title><link rel="stylesheet"href="styles.css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script></head><body><div class="container"><header><h1>UPI QR Payment Portal</h1></header><section class="card"><h2>Generate UPI QR</h2><form id="qrForm"><label>Payee UPI ID</label><input id="upiId"required/><label>Payee Name</label><input id="payeeName"required/><label>Amount</label><input id="amount"required type="number"/><label>Note</label><input id="note"/><button type="submit">Generate QR</button></form><div id="qrArea" class="qr-area hidden"><div id="qrcode"></div><div class="qr-meta"><p><strong>Scan this QR</strong></p><p id="upiUri" class="muted"></p><button id="paidBtn">I PAID</button></div></div></section><section class="card"><h2>Feedback</h2><form id="feedbackForm"><label>Transaction ID</label><input id="fbTxnId"/><label>Type</label><select id="fbType"><option value="feedback">Feedback</option><option value="complaint">Complaint</option></select><label>Rating</label><input id="rating" type="number"/><label>Message</label><textarea id="fbMessage"required></textarea><button type="submit">Submit</button></form><div id="fbResult" class="muted"></div></section></div><script src="app.js"></script></body></html>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>UPI QR Portal</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>UPI QR Payment Portal</h1>
+    </header>
+
+    <section class="card">
+      <h2>Generate UPI QR</h2>
+      <form id="qrForm">
+        <label>Payee UPI ID (eg: name@bank)</label>
+        <input id="upiId" required placeholder="merchant@upi" />
+        <label>Payee Name</label>
+        <input id="payeeName" required placeholder="Shop name or your name" />
+        <label>Amount (INR)</label>
+        <input id="amount" required type="number" min="1" placeholder="100" />
+        <label>Note (optional)</label>
+        <input id="note" placeholder="Order 123" />
+        <button type="submit">Generate QR</button>
+      </form>
+
+      <div id="qrArea" class="qr-area hidden">
+        <div id="qrcode"></div>
+        <div class="qr-meta">
+          <p><strong>Scan this QR with a UPI app to pay</strong></p>
+          <p id="upiUri" class="muted"></p>
+          <button id="paidBtn">I PAID</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Feedback / Complaint</h2>
+      <form id="feedbackForm">
+        <label>Transaction ID (optional)</label>
+        <input id="fbTxnId" placeholder="Paste txn id from payment record" />
+        <label>Type</label>
+        <select id="fbType">
+          <option value="feedback">Feedback</option>
+          <option value="complaint">Complaint</option>
+        </select>
+        <label>Rating (1-5)</label>
+        <input id="rating" type="number" min="1" max="5" placeholder="5" />
+        <label>Message</label>
+        <textarea id="fbMessage" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+      <div id="fbResult" class="muted"></div>
+    </section>
+
+    <footer class="muted">
+      <small>Built for demo. For production, implement secure payment verification and HTTPS.</small>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
